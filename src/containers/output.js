@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 
 class Output extends Component {
   renderList() {
+    console.log("in renderList");
+    console.log(this.props.allEntries);
     return this.props.allEntries.map(entry => {
       return (
         <li key={entry.id}>
@@ -15,7 +17,11 @@ class Output extends Component {
   }
 
   render() {
-    return <ul>{this.renderList()}</ul>;
+    if (this.props.allEntries !== null) {
+      return <ul>{this.renderList()}</ul>;
+    } else {
+      return <div />;
+    }
   }
 }
 
@@ -31,11 +37,10 @@ function mapStateToProps(state) {
 //      > now UserList has this.props.selectUser
 /*
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ numberEntered: numberEntered }, dispatch);
+  return bindActionCreators({ newNumEntry: newNumEntry }, dispatch);
 }
 */
 
 // We don't want to return the plain UserList (component) anymore, we want to return the smart Container
 //      > UserList is now aware of state and actions
-export default connect(mapStateToProps /*,
-  matchDispatchToProps */)(Output);
+export default connect(mapStateToProps)(Output);
