@@ -23,6 +23,86 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wf {
+  outline: 1px solid black;
+}
+.ns {
+  background-color: silver;
+}
+ns2 {
+  background-color: gray;
+}
+.rowSortType {
+  margin: auto;
+  align-items: center;
+  min-height: 50px;
+  size: "auto";
+  outline: 1px solid black;
+}
+.rowFilter {
+  margin: auto;
+  min-height: 50px;
+  size: "auto";
+  outline: 1px solid black;
+}
+.rowEntry {
+  margin: auto;
+  align-items: center;
+  min-height: 50px;
+  size: "auto";
+  outline: 1px solid black;
+}
+.rowOutput {
+  margin: auto;
+  min-height: 400px;
+  min-width: 800px;
+  outline: 1px solid black;
+}
+.buttons {
+  margin: auto;
+  size: "auto";
+  align-items: center;
+}
+.button {
+  margin: auto;
+  size: "auto";
+  align-items: center;
+}
+.buttonColumn {
+  margin: auto;
+  size: auto;
+  width: 50;
+  outline: 10px solid black;
+}
+.formGroup {
+  margin: auto;
+  text-align: right;
+}
+.colEntry1 {
+  margin: auto;
+  vertical-align: -10px;
+}
+.colEntry2 {
+  margin: auto;
+  vertical-align: -10px;
+}
+.colEntry3 {
+  padding: 1px 0;
+}
+.nLabel {
+  text-align-last: right;
+  align-items: right;
+  size: 6;
+}
+.nEntry {
+  align-items: bottom;
+  size: 1;
 }
