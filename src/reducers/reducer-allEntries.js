@@ -39,6 +39,7 @@ export default function(state = null, action) {
         //{ id: uuidv4(), num: 20 }
       ];
       
+      //this is a test
       //(9, 18, 9, 9, 28, 27, 12)
       state = [
         { id: uuidv4(), num: 9 },
