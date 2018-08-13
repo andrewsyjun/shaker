@@ -19,10 +19,10 @@ export default function(state = null, action) {
       return state;
     }
     case "FILL_CLICKED": {
-      var arr = new Array(7);
+      var arr = new Array(500);
       var rNum;
-      for (var i = 0; i < 7; i++) {
-        rNum = Math.floor(Math.random() * 50 + 1);
+      for (var i = 0; i < 500; i++) {
+        rNum = Math.floor(Math.random() * 5000 + 1);
         arr[i] = { id: uuidv4(), num: rNum };
       }
       state = arr;
@@ -38,19 +38,19 @@ export default function(state = null, action) {
         //{ id: uuidv4(), num: 55 },
         //{ id: uuidv4(), num: 20 }
       ];
-
+      
+      //(9, 18, 9, 9, 28, 27, 12)
       state = [
-        { id: uuidv4(), num: 1 },
-        { id: uuidv4(), num: 2 },
-        { id: uuidv4(), num: 3 },
-        { id: uuidv4(), num: 4 },
-        { id: uuidv4(), num: 5 },
-        { id: uuidv4(), num: 6 },
-        { id: uuidv4(), num: 7 },
-        { id: uuidv4(), num: 8 },
-        { id: uuidv4(), num: 9 }
+        { id: uuidv4(), num: 9 },
+        { id: uuidv4(), num: 18 },
+        { id: uuidv4(), num: 9 },
+        { id: uuidv4(), num: 9 },
+        { id: uuidv4(), num: 28 },
+        { id: uuidv4(), num: 27 },
+        { id: uuidv4(), num: 12 }
       ];
-*/
+      */
+
       return state;
     }
     case "DELETE_CLICKED": {
@@ -113,8 +113,8 @@ function partition(arr, pivot, lI, rI) {
   //console.log("moving right: leftIndex = " + leftIndex + "; rightIndex = " + rightIndex);
   while (rightIndex - leftIndex > 0) {
     x++;
-    if (x > 1000) {
-      console.log("something went wrong");
+    if (x > 250) {
+      console.log("something went wrong; x = " + x);
 
       console.log(
         "moving right: leftIndex = " +
@@ -142,7 +142,25 @@ function partition(arr, pivot, lI, rI) {
     }
 
     //console.log("moving left: leftIndex = " + leftIndex + "; rightIndex = " + rightIndex);
-    while (pivot <= rightIndex && arr[pivot].num < arr[rightIndex].num) {
+    while (
+      pivot <= rightIndex &&
+      leftIndex <= rightIndex &&
+      arr[pivot].num <= arr[rightIndex].num
+    ) {
+      /*
+      console.log(
+        "moving left: pivot = " +
+          pivot +
+          "; arr[" +
+          pivot +
+          "] = " +
+          arr[pivot].num +
+          "; arr[" +
+          rightIndex +
+          "].num = " +
+          arr[rightIndex].num
+      );
+      */
       if (rightIndex >= pivot) {
         rightIndex--;
         /*
@@ -194,6 +212,7 @@ function partition(arr, pivot, lI, rI) {
 }
 
 function swap(action, arr, lI, rI) {
+  /*
   console.log(action + "(" + lI + ", " + rI + ")");
 
   var msg = "before " + action;
@@ -208,11 +227,12 @@ function swap(action, arr, lI, rI) {
   }
   console.log(msg);
   msg = "";
+  */
 
   var tmp = arr[lI];
   arr[lI] = arr[rI];
   arr[rI] = tmp;
-
+  /*
   msg = "after " + action;
   for (var i = 0; i < arr.length; i++) {
     if (i === 0) {
@@ -224,6 +244,7 @@ function swap(action, arr, lI, rI) {
     }
   }
   console.log(msg);
+  */
 }
 
 function bubbleSort(state) {
@@ -267,10 +288,6 @@ function merge(arr1, arr2) {
     j = 0,
     k = 0;
   while (i < len1) {
-    if (x++ > 100) {
-      console.log("hit a problem");
-      return [{}];
-    }
     while (j < len2) {
       if (arr1[i].num <= arr2[j].num) {
         mergedArray[k++] = arr1[i++];
