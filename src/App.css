@@ -88,11 +88,11 @@ ns2 {
 }
 .colEntry1 {
   margin: auto;
-  vertical-align: -10px;
+  vertical-align: middle;
 }
 .colEntry2 {
   margin: auto;
-  vertical-align: -10px;
+  vertical-align: middle;
 }
 .colEntry3 {
   padding: 1px 0;
@@ -105,4 +105,14 @@ ns2 {
 .nEntry {
   align-items: bottom;
   size: 1;
+}
+.outputPane {
+  margin: auto;
+  size: auto;
+  min-height: 550px;
+  outline: 1px solid black;
+}
+.sortTypePane {
+  margin: auto;
+  outline: 1px solid black;
 }

@@ -1,7 +1,8 @@
 import React from "react";
-export const fillNumEntry = numEntry => {
+
+export const fillNumEntry = (newNumEntry, sortType, dupAllowed) => {
   return {
     type: "FILL_CLICKED",
-    payload: numEntry
+    payload: { newNumEntry, sortType, dupAllowed }
   };
 };

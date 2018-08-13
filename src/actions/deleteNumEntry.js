@@ -1,8 +1,8 @@
 import React from "react";
 
-export const deleteNumEntry = numEntry => {
+export const deleteNumEntry = (newNumEntry, sortType, dupAllowed) => {
   return {
-    type: "DELETED_CLICKED",
-    payload: numEntry
+    type: "NEW_CLICKED",
+    payload: { newNumEntry, sortType, dupAllowed }
   };
 };

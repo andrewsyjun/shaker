@@ -12,11 +12,6 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <Row className="rowSortType">
-          <Col>
-            <SortType />
-          </Col>
-        </Row>
         <Row className="rowFilter">
           <Col lg="5" className="colEntry1">
             <Buttons />
@@ -25,10 +20,15 @@ class App extends Component {
             <DupFilter />
           </Col>
           <Col lg="4" className="colEntry3">
-            <Entry className="colEntry3" name="hello1" />
+            <Entry className="colEntry3" />
           </Col>
         </Row>
-        <Row>
+        <Row className="rowSortType">
+          <Col className="sortTypePane">
+            <SortType />
+          </Col>
+        </Row>
+        <Row className="outputPane">
           <Col lg="12">
             <Output />
           </Col>

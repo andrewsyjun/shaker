@@ -3,6 +3,7 @@ import SortTypeReducer from "./reducer-sort-type";
 import NumberEntered from "./reducer-number";
 import DupReducer from "./reducer-dup";
 import AllEntries from "./reducer-allEntries";
+import OpenNewModal from "./reducer-openNewModal";
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -12,8 +13,9 @@ import AllEntries from "./reducer-allEntries";
 const allReducers = combineReducers({
   sortType: SortTypeReducer,
   numberEntry: NumberEntered,
-  dup: DupReducer,
-  allEntries: AllEntries
+  dupsAllowed: DupReducer,
+  allEntries: AllEntries,
+  open: OpenNewModal
 });
 
 export default allReducers;
