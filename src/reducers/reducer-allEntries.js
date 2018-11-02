@@ -19,26 +19,26 @@ export default function(state = null, action) {
       return state;
     }
     case "FILL_CLICKED": {
-      var arr = new Array(500);
+      var arr = new Array(6);
       var rNum;
-      for (var i = 0; i < 500; i++) {
-        rNum = Math.floor(Math.random() * 5000 + 1);
+      for (var i = 0; i < 6; i++) {
+        rNum = Math.floor(Math.random() * 25 + 1);
         arr[i] = { id: uuidv4(), num: rNum };
       }
       state = arr;
+
       /*
       state = [
-        { id: uuidv4(), num: 2 },
-        { id: uuidv4(), num: 37 },
-        { id: uuidv4(), num: 13 },
-        { id: uuidv4(), num: 39 },
-        { id: uuidv4(), num: 37 }
-        //{ id: uuidv4(), num: 31 },
-        //{ id: uuidv4(), num: 44 },
+        { id: uuidv4(), num: 41 },
+        { id: uuidv4(), num: 5 },
+        { id: uuidv4(), num: 73 },
+        { id: uuidv4(), num: 69 },
+        { id: uuidv4(), num: 79 },
+        { id: uuidv4(), num: 76 },
+        { id: uuidv4(), num: 18 }
         //{ id: uuidv4(), num: 55 },
         //{ id: uuidv4(), num: 20 }
       ];
-      
       //this is a test
       //(9, 18, 9, 9, 28, 27, 12)
       state = [
@@ -58,8 +58,8 @@ export default function(state = null, action) {
       console.log("DELETE_CLICKED");
       return state;
     }
-    case "INSERT_CLICKED": {
-      console.log("INSERT_CLICKED");
+    case "INSERTION_CLICKED": {
+      insertionSort(state);
       return state;
     }
     case "SORTTYPE_SELECTED": {
@@ -67,27 +67,71 @@ export default function(state = null, action) {
         case "QUICK_SORT": {
           if (state === null) return state;
           //swap("initial state", state, 0, 0);
+          console.time("quickSort");
           quickSort(state);
+          console.timeEnd("quickSort");
           return state;
         }
         case "BUBBLE_SORT": {
-          return bubbleSort(state);
+          console.time("bubbleSort");
+          state = bubbleSort(state);
+          console.timeEnd("bubbleSort");
+          return state;
         }
         case "MERGE_SORT": {
+          console.time("mergeSort");
           state = mergeSort(state);
+          console.timeEnd("mergeSort");
           return state;
         }
         case "HEAP_SORT": {
           return heapSort(state);
         }
         case "INSERTION_SORT": {
-          return insertionSort(state);
+          console.time("insertionSort");
+          state = insertionSort(state);
+          console.timeEnd("insertionSort");
+          return state;
+        }
+        case "REVERSE_ARRAY": {
+          return reverseArray(state);
+        }
+        case "REVERSE_STRING": {
+          state = [{ id: "hi", num: "hello world" }];
+          return reverseStr(state);
         }
       }
 
       return state;
     }
   }
+  return state;
+}
+
+function reverseArray(arr) {
+  console.log("REVERSE ARRAY called");
+  var len = arr.length;
+  var half = Math.floor(len / 2);
+  var even = false;
+  //check if there are odd or even number of elements
+  for (var i = 0; i < half; i++) {
+    var tmp = arr[i];
+    arr[i] = arr[len - 1 - i];
+    arr[len - 1 - i] = tmp;
+  }
+  return arr;
+}
+
+function reverseStr(state) {
+  console.log("REVERSE STRING called");
+  var str = state[0].num;
+  console.log(str);
+  var reverseStr = "";
+  for (var i = str.length - 1; i >= 0; i--) {
+    reverseStr += str.charAt(i);
+  }
+
+  state[0].num = reverseStr;
   return state;
 }
 
@@ -113,6 +157,7 @@ function partition(arr, pivot, lI, rI) {
   var x = 0;
   //console.log("moving right: leftIndex = " + leftIndex + "; rightIndex = " + rightIndex);
   while (rightIndex - leftIndex > 0) {
+    /*
     x++;
     if (x > 250) {
       console.log("something went wrong; x = " + x);
@@ -125,6 +170,7 @@ function partition(arr, pivot, lI, rI) {
       );
       return;
     }
+    */
     //console.log("leftIndex = " + leftIndex + "; rightIndex = " + rightIndex);
     while (leftIndex <= rightIndex && arr[pivot].num > arr[leftIndex].num) {
       if (leftIndex <= rightIndex) {
@@ -279,38 +325,39 @@ function mergeSort(arr) {
 }
 
 function merge(arr1, arr2) {
-  var newLen = arr1.length + arr2.length;
-  var mergedArray = new Array(newLen);
-
-  var len1 = arr1.length;
-  var len2 = arr2.length;
-  var i = 0,
-    x = 0,
-    j = 0,
-    k = 0;
+  let x = 0;
+  let i = (j = 0);
+  let newArr = [];
+  let len1 = arr1.length;
+  let len2 = arr2.length;
+  console.log("len1, len2 = " + len1 + ", " + len2);
   while (i < len1) {
+    x++;
+    if (x > 10) {
+      console.log("problem x, i , j = " + x + ", " + i + ", " + j);
+      return [];
+    }
     while (j < len2) {
-      if (arr1[i].num <= arr2[j].num) {
-        mergedArray[k++] = arr1[i++];
-
+      x++;
+      if (arr1[i] < arr2[j]) {
+        newArr.push(arr1[i++]);
         break;
       } else {
-        mergedArray[k++] = arr2[j++];
+        newArr.push(arr2[j++]);
       }
     }
 
+    console.log("x, i , j = " + x + ", " + i + ", " + j);
     if (j >= len2) {
-      mergedArray[k++] = arr1[i++];
+      newArr.push(arr1[i++]);
     }
   }
 
-  //if (len1 < len2) {
   while (j < len2) {
-    mergedArray[k++] = arr2[j++];
+    newArr.push(arr2[j++]);
   }
-  //}
 
-  return mergedArray;
+  return newArr;
 }
 
 function heapSort(state) {
@@ -318,7 +365,54 @@ function heapSort(state) {
   return state;
 }
 
-function insertionSort(state) {
-  console.log("do insertion sort");
-  return state;
+function insertionSort(arr) {
+  var tmp;
+  //var i = 4;
+  for (var i = 1; i < arr.length; i++) {
+    for (var j = 0; j < i; j++) {
+      //find a place to insert the next number
+      var found = false;
+      if (arr[j].num > arr[i].num) {
+        found = true;
+        /*
+        console.log(
+          "arr[" +
+            j +
+            "].num = " +
+            arr[j].num +
+            " >  arr[" +
+            i +
+            "].num = " +
+            arr[i].num
+        );
+        */
+
+        tmp = arr[j];
+        arr[j] = arr[i];
+        break;
+      }
+    }
+
+    for (var k = i; k > j + 1; k--) {
+      arr[k] = arr[k - 1];
+    }
+
+    if (found) {
+      arr[j + 1] = tmp;
+      /*
+      var msg = "";
+      for (var idx = 0; idx < arr.length; idx++) {
+        if (idx === 0) {
+          msg += "(" + arr[idx].num + ", ";
+        } else if (idx === arr.length - 1) {
+          msg += arr[arr.length - 1].num + ")";
+        } else {
+          msg += arr[idx].num + ", ";
+        }
+      }
+      console.log(msg);
+      */
+    }
+  }
+  return arr;
 }

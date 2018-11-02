@@ -25,6 +25,8 @@ class SortType extends Component {
           <option value="BUBBLE_SORT">Bubble Sort</option>
           <option value="QUICK_SORT">Quick Sort</option>
           <option value="HEAP_SORT">Heap Sort</option>
+          <option value="REVERSE_ARRAY">Reverse Array</option>
+          <option value="REVERSE_STRING">Reverse String</option>
         </Input>
       </FormGroup>
     );
